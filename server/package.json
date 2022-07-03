@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "path": "module",
   "scripts": {
     "test": "mocha -r ts-node/register ./tests/*$NAME*.{test,spec}.ts -t 10000 --exit",
     "predev": "npm run build",
@@ -37,6 +38,8 @@
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
     "eslint": "^8.19.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.18",
     "sinon": "^14.0.0",

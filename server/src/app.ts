@@ -3,7 +3,8 @@ import * as express from 'express';
 import entityFactory from './factory/factory';
 
 class App {
-  public app: express.Express
+  public app: express.Express;
+
   constructor() {
     this.app = express();
     this.config();
@@ -15,17 +16,13 @@ class App {
       res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
       res.header('Access-Control-Allow-Headers', '*');
 
-
-      this.app.get('/ping', (req, res, next) => {
-        return res.status(200).send('Pingou');
-      });
+      this.app.get('/ping', (req, res, next) => res.status(200).send('Pingou'));
 
       this.app.get('/object', (req, res, next) => {
         entityFactory().list(req, res, next);
       });
 
       this.app.post('/object', (req, res, next) => {
-
         entityFactory().create(req, res, next);
       });
 
@@ -34,13 +31,10 @@ class App {
 
     this.app.use(accessControl);
     this.app.use(express.json());
-
   }
 
   public start(PORT: string | number): void {
-
-
-    this.app.listen(PORT, () => console.log('O PAI TA ON NA PORTA', PORT));
+    this.app.listen(PORT, () => console.log(`Logged in port ${PORT}`));
   }
 }
 

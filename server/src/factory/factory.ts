@@ -1,4 +1,4 @@
-import Controller from './controllers/controller';
+import Controller from '../controllers/user.controller';
 import Repository from './repository/repository';
 import Service from './services/service';
 
@@ -8,6 +8,6 @@ const entityFactory = () => {
   const controller = new Controller(service);
 
   return controller;
-}
+};
 
 export default entityFactory;
