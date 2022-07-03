@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "predev": "npm run build",
+  "dev": "nodemon --watch \"./src/**\" ./src/server.ts",
+  "build": "tsc",
+  "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+  "start": "npm run build && node ./build/server.js",
   "directories": {
     "test": "tests"
   },
@@ -13,6 +18,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "docker-compose": "^0.23.17"
+    "docker-compose": "^0.23.17",
+    "dotenv": "^16.0.1",
+    "js-yaml": "^4.1.0",
+    "ts-node": "^10.8.2"
+  },
+  "devDependencies": {
+    "jest": "^28.1.2"
   }
 }
