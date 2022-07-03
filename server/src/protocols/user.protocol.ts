@@ -6,7 +6,7 @@ export interface Entity {
 }
 
 export interface IService {
-  create(data: Omit<Entity, 'id'>): Promise<Entity>;
+  create(data: Omit<Entity, 'id'>): Promise<Entity[]>;
   findAll(): Promise<Entity[]>;
   findOne(): Promise<Entity[]>;
   update(): Promise<Entity[]>;
@@ -14,7 +14,7 @@ export interface IService {
 }
 
 export interface IModel {
-  create(data: Omit<Entity, 'id'>): Promise<Entity>;
+  create(data: Omit<Entity, 'id'>): Promise<Entity[]>;
   findAll(): Promise<Entity[]>;
   findOne(): Promise<Entity[]>;
   update(): Promise<Entity[]>;

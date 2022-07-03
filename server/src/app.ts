@@ -16,7 +16,7 @@ class App {
       res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
       res.header('Access-Control-Allow-Headers', '*');
 
-      this.app.get('/ping', (req, res, next) => res.status(200).send('Pingou'));
+      this.app.get('/ping', (_req, res, next) => res.status(200).send('Pingou'));
 
       this.app.get('/object', (req, res, next) => {
         entityFactory().list(req, res, next);
