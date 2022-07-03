@@ -1,23 +1,29 @@
 /* eslint-disable import/no-unresolved */
-import * as express from 'express';
+import { Router } from 'express';
 
-const entityFactory = require('../factory/factory');
+import userController from '../controllers/user.controller';
 
-const userRouter = express.Router();
+const userRouter = Router();
 
 // Criando rotas para o CRUD de users:
 
 // Create:
-userRouter.post('/users', entityFactory.create);
+userRouter.post('/users', (req, res, next) => {
+  userController.createUser(req.body.name)
+    .then((id) => res.location(
+      `${req.baseUrl}/${String(id)}`,
+    ).status(201).send())
+    .finally(next);
+});
 
 // Read:
-userRouter.get('/users', entityFactory.findAll);
-userRouter.get('/users', entityFactory.findOne);
+userRouter.get('/users', userController.findAll);
+userRouter.get('/users', userController.findOne);
 
 // Update:
-userRouter.put('/users', entityFactory.update);
+userRouter.put('/users', userController.update);
 
 // Delete:
-userRouter.put('/users', entityFactory.delete);
+userRouter.put('/users', userController.delete);
 
 export default userRouter;

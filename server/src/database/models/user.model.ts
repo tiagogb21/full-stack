@@ -2,7 +2,8 @@ import { DataTypes, Model } from 'sequelize';
 
 const db = require('../config/db');
 
-class User extends Model {
+class UserModel extends Model {
+  // Auto generated:
   public id!: number;
 
   public email: string;
@@ -10,9 +11,13 @@ class User extends Model {
   public name: string;
 
   public age: number;
+
+  public createdAt!: Date;
+
+  public updatedAt!: Date;
 }
 
-User.init({
+UserModel.init({
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -31,9 +36,17 @@ User.init({
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  createdAt: {
+    type: DataTypes.DATE,
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+  },
 }, {
   underscored: true,
   sequelize: db,
   modelName: 'objects',
   timestamps: false,
 });
+
+export default UserModel;
