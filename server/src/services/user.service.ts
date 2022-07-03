@@ -6,7 +6,8 @@ export default class UserService implements IService {
   }
 
   create(data: Omit<Entity, 'id'>): Promise<Entity> {
-    const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+
     if (!data.email || !regexEmail.test(data.email)) {
       throw new Error('Invalid email!');
     }

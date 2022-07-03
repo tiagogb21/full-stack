@@ -1,54 +1,61 @@
 /* eslint-disable no-unused-vars */
-import { NextFunction, Request, Response } from 'express';
-import { IService } from '../protocols/user.protocol';
+import { Class, User } from '../database/models';
 
-export default class UserController {
-  constructor(private service: IService) {
-    this.service = service;
-  }
+// CRUD --> CREATE, READ, UPDATE, DELETE
 
-  async findAll(req: Request, res: Response, next: NextFunction) {
-    try {
-      const users = await this.service.findAll();
-      return res.status(201).json({ users });
-    } catch (error) {
-      return next(error);
-    }
-  }
+// CREATE --> POST "/users"
 
-  async findOne(req: Request, res: Response, next: NextFunction) {
-    try {
-      const user = await this.service.findOne();
-      return res.status(201).json({ user });
-    } catch (error) {
-      return next(error);
-    }
-  }
+async function createUser(name: string): Promise<number> {
+  const user = await User.create({
+    name,
+  });
 
-  async create(req: Request, res: Response, next: NextFunction) {
-    try {
-      const user = await this.service.create(req.body);
-      return res.status(201).json({ user });
-    } catch (error) {
-      return next(error);
-    }
-  }
+  return user.id;
+}
 
-  async update(req: Request, res: Response, next: NextFunction) {
-    try {
-      const user = await this.service.update();
-      return res.status(201).json({ user });
-    } catch (error) {
-      return next(error);
-    }
-  }
+// READ --> GET
 
-  async delete(req: Request, res: Response, next: NextFunction) {
-    try {
-      const user = await this.service.destroy();
-      return res.status(201).json({ user });
-    } catch (error) {
-      return next(error);
-    }
-  }
+// Return details about all users: "/users"
+
+async function getUsers(): Promise<any[]> {
+  const users = await User.findAll({
+    order: [['id', 'ASC']],
+    attributes: ['id', 'name'],
+  });
+
+  return users;
+}
+
+// Return details about the specified user: "/users/{id}"
+
+async function getUser(id: number): Promise<any> {
+  const user = await Class.findByPk(id, {
+    attributes: ['email', 'name', 'age'],
+  });
+
+  if (!user) { throw Error('404'); }
+
+  return user;
+}
+
+// UPDATE --> PUT "/users/{id}"
+
+async function updateUser(id: number, name: string): Promise<void> {
+  const user = await Class.findByPk(id);
+
+  if (!user) { throw Error('404'); }
+
+  await user.update({
+    name,
+  });
+}
+
+// DELETE --> DELETE "/classes/{id}"
+
+async function deleteUser(id: number): Promise<void> {
+  const user = await Class.findByPk(id);
+
+  if (!user) { throw Error('404'); }
+
+  await user.destroy();
 }
