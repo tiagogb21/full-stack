@@ -1,35 +1,39 @@
-import {DataTypes, Model} from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 
-import db from '.';
+const db = require('../config/db');
 
 class User extends Model {
   public id!: number;
-  public object!: string;
+
+  public email: string;
+
+  public name: string;
+
+  public age: number;
 }
 
 User.init({
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      allowNull: false,
-      primaryKey: true,
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    age: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    }
-  }, {
-    underscored: true,
-    sequelize: db,
-    modelName: 'objects',
-    timestamps: false,
-  }
-);
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  age: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+}, {
+  underscored: true,
+  sequelize: db,
+  modelName: 'objects',
+  timestamps: false,
+});

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-import-module-exports */
 import 'dotenv/config';
 // Importamos a classe Options da biblioteca sequelize
 import { Options } from 'sequelize';
@@ -15,6 +16,6 @@ const config: Options = {
     timezone: 'Z',
   },
   logging: false,
-}
+};
 
 module.exports = config;
